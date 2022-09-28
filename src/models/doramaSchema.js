@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "../../database.js";
 
 export const doramaSchema = new mongoose.Schema({
   title: {
@@ -19,4 +19,11 @@ export const doramaSchema = new mongoose.Schema({
   trailer: {
     type: String,
   },
+  image: {
+    type: String,
+  },
 });
+
+const Dorama = mongoose.model("dorama", doramaSchema, "dorama");
+
+export default Dorama;

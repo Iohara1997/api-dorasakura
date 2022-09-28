@@ -1,12 +1,27 @@
 import express from "express";
-import mongoose from "../database";
 import config from "../config.js";
+import { ApolloServer } from "apollo-server-express";
+import doramaResolver from "./resolvers/doramaResolver.js";
+import typeDefs from "./typeDefs/index.js";
 
-const app = express();
 const port = config.port;
 
-console.log(mongoose);
+async function startApolloServer(typeDefs, resolvers) {
+  const server = new ApolloServer({ typeDefs, resolvers });
 
-app.listen(port, (err) =>
-  err ? console.error(err) : console.log("Server listening on PORT 3000")
-);
+  await server.start();
+
+  const app = express();
+
+  server.applyMiddleware({
+    app,
+    path: "/",
+  });
+
+  await new Promise((resolvers) => app.listen(port, resolvers));
+  console.log(
+    `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+  );
+}
+
+startApolloServer(typeDefs, doramaResolver);

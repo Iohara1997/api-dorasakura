@@ -1,6 +1,6 @@
 import mongoose from "../../database.js";
 
-export const doramaSchema = new mongoose.Schema({
+const doramaSchema = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -24,6 +24,6 @@ export const doramaSchema = new mongoose.Schema({
   },
 });
 
-const Dorama = mongoose.model("dorama", doramaSchema, "dorama");
+const Dorama = mongoose.model("doramas", doramaSchema);
 
 export default Dorama;

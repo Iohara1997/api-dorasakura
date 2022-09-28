@@ -2,26 +2,34 @@ import Dorama from "../models/doramaSchema.js";
 
 const doramaResolver = {
   Query: {
-    dorama() {
-      return find();
+    async allDoramas(root, args, { user }) {
+      try {
+        if (!user) throw new Error("You are not authenticated!");
+        return await Dorama.find({});
+      } catch (error) {
+        throw new Error(error.message);
+      }
     },
-    dorama(_, { id }) {
-      return findById(id);
+    async dorama(_, { id }, { user }) {
+      if (!user) throw new Error("You are not authenticated!");
+      return await Dorama.findById(id);
     },
   },
   Mutation: {
-    createDorama(_, { dorama }) {
+    async createDorama(_, { dorama }, { user }) {
+      if (!user) throw new Error("You are not authenticated!");
       const newDorama = new Dorama(dorama);
-      return newDorama.save();
+      return await newDorama.save();
     },
-    updateDorama(_, { id, dorama }) {
-      return findByIdAndUpdate(id, dorama, {
+    async updateDorama(_, { id, dorama }, { user }) {
+      if (!user) throw new Error("You are not authenticated!");
+      return await Dorama.findByIdAndUpdate(id, dorama, {
         new: true,
-        useFindAndModify: false,
       });
     },
-    deleteDorama(_, { id }) {
-      return findByIdAndRemove(id, {
+    async deleteDorama(_, { id }, { user }) {
+      if (!user) throw new Error("You are not authenticated!");
+      return await Dorama.findByIdAndRemove(id, {
         useFindAndModify: false,
       });
     },

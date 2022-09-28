@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-const types = gql`
+const doramaTypes = gql`
   type Dorama {
     id: ID!
     title: String
@@ -12,4 +12,4 @@ const types = gql`
     image: String
   }
 `;
-export default types;
+export default doramaTypes;

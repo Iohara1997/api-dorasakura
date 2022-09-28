@@ -2,8 +2,9 @@ import { gql } from "apollo-server-express";
 
 const query = gql`
   type Query {
-    doramas: [Dorama]
-    dorama(id: ID!): Dorama
+    user(id: ID!): User
+    allUsers: [User!]!
+    me: User
   }
 `;
 export default query;

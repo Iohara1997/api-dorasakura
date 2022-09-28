@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-const mutation = gql`
+const doramaMutation = gql`
   type Mutation {
     createDorama(dorama: DoramaInput): Dorama
     updateDorama(id: String, dorama: DoramaInput): Dorama
@@ -16,4 +16,4 @@ const mutation = gql`
     image: String
   }
 `;
-export default mutation;
+export default doramaMutation;

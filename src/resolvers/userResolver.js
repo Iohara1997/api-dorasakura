@@ -51,7 +51,7 @@ const userResolver = {
     },
     async login(_, { email, password }) {
       try {
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ email: email }).exec();
         if (!user) {
           throw new Error("No user with that email");
         }

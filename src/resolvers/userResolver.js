@@ -27,16 +27,17 @@ const userResolver = {
     },
   },
   Mutation: {
-    async registerUser(root, { username, email, password }) {
+    async registerUser(root, { username, email, password, role }) {
       try {
         const newUser = new User({
           email: email,
           username: username,
           password: await hash(password, 10),
+          role: role,
         });
         const userSaved = await newUser.save();
         const token = sign(
-          { id: userSaved.id, email: userSaved.email },
+          { id: userSaved.id, email: userSaved.email, role: userSaved.role },
           config.jwtConfig,
           { expiresIn: "1y" }
         );
@@ -72,6 +73,14 @@ const userResolver = {
       } catch (error) {
         throw new Error(error.message);
       }
+    },
+    async updateUser(_, { id, doramas, password }, { user }) {
+      if (!user) throw new Error("You are not authenticated!");
+      return await User.findByIdAndUpdate(
+        id,
+        { password: await hash(password, 10), $push: { doramas: doramas } },
+        { safe: true, upsert: true, new: true }
+      );
     },
   },
 };

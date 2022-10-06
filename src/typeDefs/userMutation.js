@@ -8,11 +8,16 @@ const mutation = gql`
       password: String!
     ): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
+    updateUser(id: String, password: String, doramas: [ID]): UpdatePayload!
   }
   type AuthPayload {
     token: String!
     username: String!
     email: String!
+  }
+  type UpdatePayload {
+    password: String!
+    doramas: [ID!]
   }
 `;
 

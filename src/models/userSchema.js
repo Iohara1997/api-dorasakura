@@ -10,6 +10,15 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  doramas: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "doramas",
+    },
+  ],
+  role: {
+    type: String,
+  },
 });
 
 const User = mongoose.model("users", userSchema);

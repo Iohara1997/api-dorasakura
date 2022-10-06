@@ -5,6 +5,8 @@ const userTypes = gql`
     id: ID!
     username: String!
     email: String!
+    role: String
+    doramas: [ID!]
   }
 `;
 export default userTypes;

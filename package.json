@@ -21,6 +21,7 @@
   "dependencies": {
     "apollo-server": "^3.10.2",
     "apollo-server-express": "^3.10.2",
+    "aws-sdk": "^2.1230.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.2",
     "easygraphql-tester": "^6.0.1",

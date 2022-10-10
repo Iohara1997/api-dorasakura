@@ -35,6 +35,7 @@ const userResolver = {
         if (user) {
           throw new Error("User already exists");
         }
+        if (!role) role = "user";
         const newUser = new User({
           email: email,
           username: username,

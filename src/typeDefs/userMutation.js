@@ -6,6 +6,7 @@ const mutation = gql`
       username: String!
       email: String!
       password: String!
+      role: String
     ): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
     updateUser(id: String, password: String, doramas: [ID]): UpdatePayload!
@@ -14,6 +15,7 @@ const mutation = gql`
     token: String!
     username: String!
     email: String!
+    role: String
   }
   type UpdatePayload {
     password: String!

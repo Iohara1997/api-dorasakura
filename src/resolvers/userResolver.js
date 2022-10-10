@@ -29,6 +29,12 @@ const userResolver = {
   Mutation: {
     async registerUser(root, { username, email, password, role }) {
       try {
+        const user = await User.findOne({
+          $or: [{ email: email }, { username: username }],
+        }).exec();
+        if (user) {
+          throw new Error("User already exists");
+        }
         const newUser = new User({
           email: email,
           username: username,
